@@ -6,7 +6,7 @@ const todoController = Router();
 todoController.get("/", async (req, res) => {
   const result = await TodoModel.find({ userId: req.body.userId });
   //only get logged in users todos
-  res.send(result);
+  res.status(200).send({ data: result });
 });
 
 // http://localhost:8080/todo/create
@@ -14,13 +14,12 @@ todoController.post("/create", async (req, res) => {
   const payload = req.body;
   const newTodo = await TodoModel(payload);
   await newTodo.save();
-  res.send("Todo created successfully");
+  res.send(201).send({ msg: "Todo created successfully" });
 });
 
 // http://localhost:8080/todo/todoid
 todoController.patch("/:todoId", async (req, res) => {
   const todoId = req.params.todoId;
-  console.log(req.body);
 
   await TodoModel.findByIdAndUpdate(
     { _id: todoId },
@@ -34,7 +33,7 @@ todoController.patch("/:todoId", async (req, res) => {
 
   const result = await TodoModel.findOne({ _id: todoId });
 
-  res.send({
+  res.status(200).send({
     msg: "Todo Updated successfully",
     updatedTodo: result,
   });
@@ -45,7 +44,7 @@ todoController.delete("/:todoId", async (req, res) => {
   const todoId = req.params.todoId;
 
   const result = await TodoModel.findOneAndDelete({ _id: todoId });
-  res.send({
+  res.status(200).send({
     msg: "Todo Deleted successfully",
     title: result.title,
   });
