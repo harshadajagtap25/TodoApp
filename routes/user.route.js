@@ -7,6 +7,7 @@ const SECRET_KEY = process.env.SECRET_KEY || "qwerty";
 const { Router } = require("express");
 const userController = Router();
 
+// http://localhost:8080/user/signup
 userController.post("/signup", async (req, res) => {
   let { email, password, name, role } = req.body;
 
@@ -24,6 +25,7 @@ userController.post("/signup", async (req, res) => {
     .catch((err) => res.status(200).send({ error: true, msg: "Try again" }));
 });
 
+// http://localhost:8080/user/login
 userController.post("/login", async (req, res) => {
   let { email, password } = req.body;
   let user = await UserModel.findOne({ email });

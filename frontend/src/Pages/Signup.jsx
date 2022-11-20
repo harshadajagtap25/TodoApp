@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { signup } from "../Redux/AuthReducer/action";
 import {
   Flex,
   Box,
@@ -18,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { signup } from "../Redux/AuthReducer/actions";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -34,7 +34,7 @@ const Signup = () => {
         password,
       };
 
-      //   dispatch(signup(payload));
+        dispatch(signup(payload));
     }
   };
   return (

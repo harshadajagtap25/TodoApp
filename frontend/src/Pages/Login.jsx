@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
-  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { login } from "../Redux/AuthReducer/actions";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    const payload = { email: email, password: password };
+    dispatch(login(payload));
+  };
   return (
     <Flex
       minH={"100vh"}
@@ -39,11 +46,14 @@ const Login = () => {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel textColor={"#9b45b2"}>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password">
               <FormLabel textColor={"#9b45b2"}>Password</FormLabel>
-              <Input type="password" />
+              <Input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormControl>
             <Stack spacing={10}>
               <Button
@@ -53,6 +63,7 @@ const Login = () => {
                 _hover={{
                   bg: "rgba(155, 69, 178, 0.8)",
                 }}
+                onClick={handleLogin}
               >
                 Login
               </Button>
