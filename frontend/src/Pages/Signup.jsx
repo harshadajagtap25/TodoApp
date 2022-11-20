@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Flex,
   Box,
@@ -14,6 +14,7 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Select,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
@@ -23,8 +24,10 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [alreadyExist, setAlreadyExist] = useState(false);
 
   const handleSignup = () => {
     if (name && email && password) {
@@ -32,9 +35,12 @@ const Signup = () => {
         name,
         email,
         password,
+        role,
       };
 
-        dispatch(signup(payload));
+      dispatch(signup(payload)).then((r) => {
+        if (r === "SIGNIN_FAILURE") setAlreadyExist(true);
+      });
     }
   };
   return (
@@ -59,6 +65,15 @@ const Signup = () => {
           p={8}
         >
           <Stack spacing={4}>
+            {alreadyExist && (
+              <HStack>
+                <Text textColor={"#9b45b2"}>
+                  User already exists...
+                  <Text>Please login with another Mail Id</Text>
+                </Text>
+              </HStack>
+            )}
+
             <HStack>
               <FormControl id="firstName" isRequired>
                 <FormLabel textColor={"#9b45b2"}>Name</FormLabel>
@@ -88,6 +103,16 @@ const Signup = () => {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
+            <Stack>
+              <Select
+                variant="flushed"
+                placeholder="Select Role"
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </Select>
+            </Stack>
             <Stack spacing={10} pt={2}>
               <Button
                 loadingText="Submitting"

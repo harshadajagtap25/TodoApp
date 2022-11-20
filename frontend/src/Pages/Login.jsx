@@ -12,15 +12,19 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/AuthReducer/actions";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     const payload = { email: email, password: password };
-    dispatch(login(payload));
+    dispatch(login(payload)).then((r) => {
+      if (r === "LOGIN_SUCCESS") navigate("/");
+    });
   };
   return (
     <Flex
