@@ -15,9 +15,9 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -42,14 +42,11 @@ const Signup = () => {
       minH={"100vh"}
       align={"center"}
       justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
       backgroundImage={
         "linear-gradient(to right , rgba(240, 163, 188, 0.5), rgba(240, 163, 188, 1)        )"
       }
-
-      // #f0a3bc,  #eb6b40, #9b45b2
     >
-      <Stack spacing={8} mx={"auto"} maxW={"60%"} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"} textColor={"#9b45b2"}>
             Sign up Here
@@ -64,16 +61,16 @@ const Signup = () => {
           <Stack spacing={4}>
             <HStack>
               <FormControl id="firstName" isRequired>
-                <FormLabel>Name</FormLabel>
+                <FormLabel textColor={"#9b45b2"}>Name</FormLabel>
                 <Input type="text" onChange={(e) => setName(e.target.value)} />
               </FormControl>
             </HStack>
             <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel textColor={"#9b45b2"}>Email address</FormLabel>
               <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
+              <FormLabel textColor={"#9b45b2"}>Password</FormLabel>
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -105,11 +102,12 @@ const Signup = () => {
                 Sign up
               </Button>
             </Stack>
-            <Stack pt={6}>
-              <Text align={"center"}>
-                Already a user? <Link color={"#9b45b2"}>Login</Link>
-              </Text>
-            </Stack>
+            <HStack pt={6} justifyContent={"center"}>
+              <Text align={"center"}>Already a user? </Text>
+              <Link to="/login">
+                <Text color={"#9b45b2"}>Login</Text>
+              </Link>
+            </HStack>
           </Stack>
         </Box>
       </Stack>
