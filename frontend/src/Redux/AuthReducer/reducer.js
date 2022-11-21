@@ -1,8 +1,10 @@
+import { getData, storeData } from "../../Utils/localStorage";
 import * as types from "./actionTypes";
 
 const initState = {
   isAuth: false,
-  token: localStorage.getItem("todoapp_token") | undefined,
+  token: getData("todoApp_token") || undefined,
+  details: [],
   isLoading: false,
   isError: false,
 };
@@ -39,7 +41,7 @@ const reducer = (state = initState, action) => {
       };
     }
     case types.LOGIN_SUCCESS: {
-      localStorage.setItem("ticket_token", payload);
+      storeData("todoApp_token", payload);
       return {
         ...state,
         isLoading: false,
@@ -55,6 +57,30 @@ const reducer = (state = initState, action) => {
         isError: true,
         isAuth: false,
         token: undefined,
+      };
+    }
+    case types.GET_DETAILS_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+    case types.GET_DETAILS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        details: payload,
+        isError: false,
+        isAuth: true,
+        token: payload,
+      };
+    }
+    case types.GET_DETAILS_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
       };
     }
     default:

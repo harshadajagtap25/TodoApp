@@ -13,6 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/AuthReducer/actions";
 import { useNavigate } from "react-router-dom";
+import { storeData } from "../Utils/localStorage";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,10 @@ const Login = () => {
   const handleLogin = () => {
     const payload = { email: email, password: password };
     dispatch(login(payload)).then((r) => {
-      if (r === "LOGIN_SUCCESS") navigate("/");
+      if (r === "LOGIN_SUCCESS") {
+        storeData("UserEmail", email);
+        navigate("/");
+      }
     });
   };
   return (

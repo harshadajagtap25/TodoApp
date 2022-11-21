@@ -50,10 +50,10 @@ userController.post("/login", async (req, res) => {
   });
 });
 
-// http://localhost:8080/user/users/praju
-userController.get("/:name", async (req, res) => {
-  const name = req.params.name;
-  const result = await UserModel.find({ name: name });
+// http://localhost:8080/user/users/h@gmail.com
+userController.get("/users/:email", async (req, res) => {
+  const email = req.params.email;
+  const result = await UserModel.find({ email: email });
   res.status(200).send({ data: result });
 });
 

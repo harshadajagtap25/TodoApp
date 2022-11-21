@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import UserDetails from "../Components/UserDetails";
 
 const Home = () => {
+  
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      Home
+      <UserDetails />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

@@ -2,7 +2,6 @@ import * as types from "./actionTypes";
 import axios from "axios";
 
 const signup = (payload) => (dispatch) => {
-
   dispatch({ type: types.SIGNIN_REQUEST });
 
   return axios
@@ -28,9 +27,29 @@ const login = (payload) => (dispatch) => {
       return types.LOGIN_SUCCESS;
     })
     .catch((err) => {
-      dispatch({ type: types.LOGIN_FAILURE, payload:err.msg });
+      dispatch({ type: types.LOGIN_FAILURE, payload: err.msg });
       return types.LOGIN_FAILURE;
     });
 };
 
-export { signup, login };
+const userDetails = (UserEmail, token) => (dispatch) => {
+  dispatch({ type: types.GET_DETAILS_REQUEST });
+
+  return axios
+    .get(`http://localhost:8080/user/users/${UserEmail}`, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+    .then((r) => {
+      dispatch({ type: types.GET_DETAILS_SUCCESS, payload: r.data.data[0] });
+      // console.log(r.data.data[0]);
+      return types.GET_DETAILS_SUCCESS;
+    })
+    .catch((err) => {
+      dispatch({ type: types.GET_DETAILS_FAILURE, payload: err.msg });
+      return types.GET_DETAILS_FAILURE;
+    });
+};
+
+export { signup, login, userDetails };
