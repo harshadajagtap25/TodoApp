@@ -14,11 +14,19 @@ const todoSchema = mongoose.Schema({
     required: true,
   },
   category: {
-    type: "string",
+    type: "Array",
     required: true,
   },
   userId: {
     type: "string",
+  },
+  startDate: {
+    type: "string",
+    required: true,
+  },
+  endDate: {
+    type: "string",
+    required: true,
   },
 });
 

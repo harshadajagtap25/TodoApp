@@ -1,8 +1,7 @@
 import * as types from "./actionTypes";
 
 const initState = {
-  toods: [],
-  bookmarks: [],
+  todos: [],
   isLoading: false,
   isError: false,
 };
@@ -19,7 +18,6 @@ const reducer = (state = initState, action) => {
     case types.CREATE_TODO_SUCCESS:
       return {
         ...state,
-        todos: payload,
         isLoading: false,
         isError: false,
       };
@@ -29,7 +27,7 @@ const reducer = (state = initState, action) => {
         isLoading: false,
         isError: true,
       };
-      case types.GET_TODO_REQUEST:
+    case types.GET_TODO_REQUEST:
       return {
         ...state,
         isLoading: true,

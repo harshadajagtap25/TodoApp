@@ -1,11 +1,15 @@
 import * as types from "./actionTypes";
 import axios from "axios";
 
-const createTodo = (payload) => (dispatch) => {
+const createTodo = (payload, token) => (dispatch) => {
   dispatch({ type: types.CREATE_TODO_REQUEST });
 
   return axios
-    .post(`https://TODO25.herokuapp.com/TODO/create`, payload)
+    .post(`http://localhost:8080/todo/create`, payload, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
     .then((r) => {
       dispatch({ type: types.CREATE_TODO_SUCCESS, payload: r.data });
       return types.CREATE_TODO_SUCCESS;
@@ -15,11 +19,15 @@ const createTodo = (payload) => (dispatch) => {
       return types.CREATE_TODO_FAILURE;
     });
 };
-const getTodo = (payload) => (dispatch) => {
+const getTodo = (token) => (dispatch) => {
   dispatch({ type: types.GET_TODO_REQUEST });
 
   return axios
-    .get(`https://TODO25.herokuapp.com/`)
+    .get(`http://localhost:8080/todo/`, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
     .then((r) => {
       dispatch({ type: types.GET_TODO_SUCCESS, payload: r.data });
       return types.GET_TODO_SUCCESS;

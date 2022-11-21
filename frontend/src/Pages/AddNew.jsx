@@ -14,7 +14,10 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { COLORS } from "../Components/colors";
+import { createTodo } from "../Redux/AppReducer/actions";
+import { getData } from "../Utils/localStorage";
 
 const AddNew = () => {
   const [title, setTitle] = useState("");
@@ -23,6 +26,10 @@ const AddNew = () => {
   const [category, setCategory] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const dispatch = useDispatch();
+
+  const token = getData("todoApp_token");
 
   const handleCreateTask = () => {
     const payload = {
@@ -33,7 +40,8 @@ const AddNew = () => {
       startDate,
       endDate,
     };
-    console.log(payload);
+    // console.log(payload);
+    dispatch(createTodo(payload, token));
     setStatus("");
     setTitle("");
     setDescription("");
