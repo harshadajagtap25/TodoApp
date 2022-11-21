@@ -1,11 +1,4 @@
-import {
-  Box,
-  Heading,
-  HStack,
-  Image,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Heading, HStack, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +31,7 @@ const UserDetails = () => {
       borderBottomLeftRadius={"20px"}
       borderBottomRightRadius={"20px"}
     >
-      <Box>
+      <Box cursor={"pointer"}>
         <FaArrowLeft color={COLORS.purple} />
       </Box>
       <Box w={"80%"} m={"auto"}>

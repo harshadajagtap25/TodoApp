@@ -1,9 +1,13 @@
 import { Box, Center, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { COLORS } from "./colors";
 
 const TaskDetails = () => {
-  const handleAddTask = () => {};
+  const navigate = useNavigate();
+  const handleAddTask = () => {
+    navigate("/create");
+  };
   return (
     <Box w={"100%"} p={"20px"} h={"auto"}>
       <HStack justifyContent={"space-between"}>
