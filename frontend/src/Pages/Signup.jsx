@@ -19,6 +19,7 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { signup } from "../Redux/AuthReducer/actions";
+import { COLORS } from "../Components/colors";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -54,7 +55,11 @@ const Signup = () => {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"} textColor={"#9b45b2"}>
+          <Heading
+            fontSize={"4xl"}
+            textAlign={"center"}
+            textColor={COLORS.purple}
+          >
             Sign up Here
           </Heading>
         </Stack>
@@ -67,7 +72,7 @@ const Signup = () => {
           <Stack spacing={4}>
             {alreadyExist && (
               <HStack>
-                <Text textColor={"#9b45b2"}>
+                <Text textColor={COLORS.purple}>
                   User already exists...
                   <Text>Please login with another Mail Id</Text>
                 </Text>
@@ -76,16 +81,16 @@ const Signup = () => {
 
             <HStack>
               <FormControl id="firstName" isRequired>
-                <FormLabel textColor={"#9b45b2"}>Name</FormLabel>
+                <FormLabel textColor={COLORS.purple}>Name</FormLabel>
                 <Input type="text" onChange={(e) => setName(e.target.value)} />
               </FormControl>
             </HStack>
             <FormControl id="email" isRequired>
-              <FormLabel textColor={"#9b45b2"}>Email address</FormLabel>
+              <FormLabel textColor={COLORS.purple}>Email address</FormLabel>
               <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password" isRequired>
-              <FormLabel textColor={"#9b45b2"}>Password</FormLabel>
+              <FormLabel textColor={COLORS.purple}>Password</FormLabel>
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -117,7 +122,7 @@ const Signup = () => {
               <Button
                 loadingText="Submitting"
                 size="lg"
-                bg={"#9b45b2"}
+                bg={COLORS.purple}
                 color={"white"}
                 _hover={{
                   bg: "rgba(155, 69, 178, 0.8)",
@@ -130,7 +135,7 @@ const Signup = () => {
             <HStack pt={6} justifyContent={"center"}>
               <Text align={"center"}>Already a user? </Text>
               <Link to="/login">
-                <Text color={"#9b45b2"}>Login</Text>
+                <Text color={COLORS.purple}>Login</Text>
               </Link>
             </HStack>
           </Stack>

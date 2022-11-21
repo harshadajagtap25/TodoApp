@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import { login } from "../Redux/AuthReducer/actions";
 import { useNavigate } from "react-router-dom";
 import { storeData } from "../Utils/localStorage";
+import { COLORS } from "../Components/colors";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,7 +43,7 @@ const Login = () => {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textColor={"#9b45b2"}>
+          <Heading fontSize={"4xl"} textColor={COLORS.purple}>
             Login to your account
           </Heading>
         </Stack>
@@ -53,11 +55,11 @@ const Login = () => {
         >
           <Stack spacing={4}>
             <FormControl id="email">
-              <FormLabel textColor={"#9b45b2"}>Email address</FormLabel>
+              <FormLabel textColor={COLORS.purple}>Email address</FormLabel>
               <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password">
-              <FormLabel textColor={"#9b45b2"}>Password</FormLabel>
+              <FormLabel textColor={COLORS.purple}>Password</FormLabel>
               <Input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
@@ -66,7 +68,7 @@ const Login = () => {
             <Stack spacing={10}>
               <Button
                 // size="lg"
-                bg={"#9b45b2"}
+                bg={COLORS.purple}
                 color={"white"}
                 _hover={{
                   bg: "rgba(155, 69, 178, 0.8)",
