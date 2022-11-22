@@ -23,13 +23,13 @@ const getTodo = (token) => (dispatch) => {
   dispatch({ type: types.GET_TODO_REQUEST });
 
   return axios
-    .get(`http://localhost:8080/todo/`, {
+    .get(`http://localhost:8080/todo`, {
       headers: {
         Authorization: `Basic ${token}`,
       },
     })
     .then((r) => {
-      dispatch({ type: types.GET_TODO_SUCCESS, payload: r.data });
+      dispatch({ type: types.GET_TODO_SUCCESS, payload: r.data.data });
       return types.GET_TODO_SUCCESS;
     })
     .catch((e) => {

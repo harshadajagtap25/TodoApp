@@ -14,7 +14,7 @@ todoController.post("/create", async (req, res) => {
   const payload = req.body;
   const newTodo = await TodoModel(payload);
   await newTodo.save();
-  res.send(201).send({ msg: "Todo created successfully" });
+  res.status(201).send({ msg: "Todo created successfully" });
 });
 
 // http://localhost:8080/todo/todoid

@@ -1,13 +1,44 @@
 import { Box, Center, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getTodo } from "../Redux/AppReducer/actions";
+import { getData } from "../Utils/localStorage";
 import { COLORS } from "./colors";
 
 const TaskDetails = () => {
+  const token = getData("todoApp_token");
+  const todos = useSelector((store) => store.AppReducer.todos);
+  const [todoTask, setTodoTask] = useState("");
+  const [inProgressTask, setInProgressTask] = useState("");
+  const [doneTask, setDoneTask] = useState("");
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const handleAddTask = () => {
     navigate("/create");
   };
+
+  const handleGetTodos = () => {
+    dispatch(getTodo(token));
+    console.log(todos);
+    if (todos.length > 0) {
+      let todo = todos.filter((t) => t.status === "todo");
+      todo && setTodoTask(todo);
+      let progress = todos.filter((t) => t.status === "in-progress");
+      progress && setInProgressTask(progress);
+      let done = todos.filter((t) => t.status === "done");
+      done && setDoneTask(done);
+    }
+    // console.log("todo",todoTask)
+    // console.log("PRO", inProgressTask)
+    // console.log("done", doneTask)
+  };
+
+  useEffect(() => {
+    handleGetTodos();
+  }, [todos.length]);
   return (
     <Box w={"100%"} p={"20px"} h={"auto"}>
       <HStack justifyContent={"space-between"}>
@@ -48,7 +79,7 @@ const TaskDetails = () => {
               To Do Tasks
             </Text>
             <Text fontSize={"12px"} color={"gray"}>
-              _ tasks left, _ tasks done
+              {todoTask.length} tasks left, {doneTask.length} tasks done
             </Text>
           </Box>
         </HStack>
@@ -69,7 +100,7 @@ const TaskDetails = () => {
               In Progress Tasks
             </Text>
             <Text fontSize={"12px"} color={"gray"}>
-              _ tasks on way{" "}
+              {inProgressTask.length} tasks on way
             </Text>
           </Box>
         </HStack>
@@ -87,11 +118,10 @@ const TaskDetails = () => {
           </Center>
           <Box textAlign={"left"} h={"100%"}>
             <Text fontSize={"18px"} fontWeight={500} color={COLORS.light_green}>
-              To Do Tasks
+              Done Tasks
             </Text>
             <Text fontSize={"12px"} color={"gray"}>
-              {" "}
-              _ tasks done
+              {doneTask.length} tasks done
             </Text>
           </Box>
         </HStack>

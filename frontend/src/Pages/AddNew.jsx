@@ -15,6 +15,7 @@ import {
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { COLORS } from "../Components/colors";
 import { createTodo } from "../Redux/AppReducer/actions";
 import { getData } from "../Utils/localStorage";
@@ -28,6 +29,7 @@ const AddNew = () => {
   const [endDate, setEndDate] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const token = getData("todoApp_token");
 
@@ -41,7 +43,9 @@ const AddNew = () => {
       endDate,
     };
     // console.log(payload);
-    dispatch(createTodo(payload, token));
+    dispatch(createTodo(payload, token)).then((r) => {
+      if (r === "CREATE_TODO_SUCCESS") navigate("/");
+    });
     setStatus("");
     setTitle("");
     setDescription("");

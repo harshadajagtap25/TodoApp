@@ -16,7 +16,6 @@ const UserDetails = () => {
   const handleGetDetails = () => {
     dispatch(userDetails(UserEmail, token));
   };
-
   useEffect(() => {
     handleGetDetails();
   }, []);
