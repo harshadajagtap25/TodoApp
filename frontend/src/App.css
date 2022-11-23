@@ -6,6 +6,15 @@
   height: 40vmin;
   pointer-events: none;
 }
+.bgGreen {
+  background: #397754;
+}
+.bgOrange {
+  background: #eb6b40;
+}
+.bgPink {
+  background: #f0a3bc;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

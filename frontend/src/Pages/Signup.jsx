@@ -50,7 +50,7 @@ const Signup = () => {
       align={"center"}
       justify={"center"}
       backgroundImage={
-        "linear-gradient(to right , rgba(240, 163, 188, 0.5), rgba(240, 163, 188, 1)        )"
+        "linear-gradient(to right , rgba(240, 163, 188, 0.2), rgba(240, 163, 188, 1)        )"
       }
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>

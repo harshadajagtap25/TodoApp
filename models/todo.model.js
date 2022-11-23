@@ -22,11 +22,9 @@ const todoSchema = mongoose.Schema({
   },
   startDate: {
     type: "string",
-    required: true,
   },
   endDate: {
     type: "string",
-    required: true,
   },
 });
 

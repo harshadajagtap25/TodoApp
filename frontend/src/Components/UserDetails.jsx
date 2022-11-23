@@ -25,7 +25,7 @@ const UserDetails = () => {
       p={"25px"}
       h={"auto"}
       backgroundImage={
-        "linear-gradient(to right , rgba(235, 107, 64, 0.5), rgba(235, 107, 64, 1))"
+        "linear-gradient(to right , rgba(235, 107, 64, 0.2), rgba(235, 107, 64, 1))"
       }
       borderBottomLeftRadius={"20px"}
       borderBottomRightRadius={"20px"}

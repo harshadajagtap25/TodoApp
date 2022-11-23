@@ -1,7 +1,7 @@
 import { Box, Center, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getTodo } from "../Redux/AppReducer/actions";
 import { getData } from "../Utils/localStorage";
 import { COLORS } from "./colors";
@@ -31,19 +31,25 @@ const TaskDetails = () => {
       let done = todos.filter((t) => t.status === "done");
       done && setDoneTask(done);
     }
-    // console.log("todo",todoTask)
-    // console.log("PRO", inProgressTask)
-    // console.log("done", doneTask)
   };
 
   useEffect(() => {
     handleGetTodos();
   }, [todos.length]);
   return (
-    <Box w={"100%"} p={"20px"} h={"auto"}>
+    <Box
+      w={"100%"}
+      p={"20px"}
+      h={"auto"}
+      mt={"20px"}
+      backgroundImage={
+        "linear-gradient(to right , rgba(112, 190, 81, 0.2   ), rgba(112, 190, 81, 0.5))"
+      }
+      borderRadius={"20px"}
+    >
       <HStack justifyContent={"space-between"}>
         <Heading textAlign={"left"} color={COLORS.purple}>
-          My Tasks
+          <Link to="alltasks">My Tasks</Link>
         </Heading>
         <Center
           bgColor={COLORS.purple}
