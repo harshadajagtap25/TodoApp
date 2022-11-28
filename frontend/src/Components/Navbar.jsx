@@ -9,9 +9,11 @@ const Navbar = () => {
       <Link to="/signup">Signup</Link>
       <Link to ="/create">Create</Link>
       <Link to ="/alltasks">All</Link>
+      <Link to ="/task/:id"></Link>
 
     </div>
   );
 };
 
 export default Navbar;
+

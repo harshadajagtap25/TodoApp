@@ -1,9 +1,11 @@
 import { Box, GridItem, Text } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { COLORS } from "./colors";
 
 const TaskItem = ({ todo }) => {
+  const navigate = useNavigate();
   return (
     <GridItem
       h={"150px"}
@@ -20,6 +22,10 @@ const TaskItem = ({ todo }) => {
           fontSize={["20px", "15px"]}
           color={COLORS.purple}
           fontWeight={500}
+          onClick={() => {
+            console.log("clicked", todo._id);
+            navigate(`/task/${todo._id}`);
+          }}
         >
           {todo.title}
         </Text>

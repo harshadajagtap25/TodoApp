@@ -19,11 +19,17 @@ import TaskItem from "../Components/TaskItem";
 const AllTasks = () => {
   const token = getData("todoApp_token");
   const todos = useSelector((store) => store.AppReducer.todos);
+  const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
 
   const handleGetTodos = () => {
     dispatch(getTodo(token));
-    console.log(todos);
+  };
+  const handleSearchTask = (e) => {
+    if (e.key === "Enter") {
+      let searchResult = todos.filter((todo) => todo.title === searchText);
+      console.log(searchResult);
+    }
   };
 
   useEffect(() => {
@@ -74,7 +80,12 @@ const AllTasks = () => {
             </Box>
             <Box>
               {searchBox && (
-                <Input variant="flushed" placeholder="Serach Task" />
+                <Input
+                  variant="flushed"
+                  placeholder="Serach Task"
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyUp={(e) => handleSearchTask(e)}
+                />
               )}
             </Box>
           </HStack>
@@ -91,7 +102,9 @@ const AllTasks = () => {
             m={"auto"}
           >
             {todos.map((todo) => (
-              <TaskItem key={todo._id} todo={todo} />
+              <div key={todo._id}>
+                <TaskItem todo={todo} />
+              </div>
             ))}
           </Grid>
         )}
